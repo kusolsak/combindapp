@@ -3,8 +3,11 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { SideSchedulePage } from '../pages/side-schedule/side-schedule';
+import { SidePortfolioPage } from '../pages/side-portfolio/side-portfolio';
+import { SidePaymentPage } from '../pages/side-payment/side-payment';
+import { SideSettingPage } from '../pages/side-setting/side-setting';
+import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,17 +15,19 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = TabsPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any,icon:string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'ตารางอบรม', component: SideSchedulePage ,icon:"calendar"},
+      { title: ' ผลงานของเรา', component: SidePortfolioPage ,icon:"albums"},
+      { title: 'ช่องทางข่าว', component: SidePaymentPage ,icon:"logo-bitcoin" },
+      { title: 'ตั้งค่าระบบ', component: SideSettingPage  ,icon:"settings"}
     ];
 
   }
@@ -39,6 +44,6 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    this.nav.push(page.component);
   }
 }
